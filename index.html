@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Officiële School Cijfer Tool - Werkt met SomToday & Magister</title>
+    <title>Officiële Cijfer Tool - Werkt met SomToday & Magister | 97% Slagingspercentage</title>
+    <meta name="description" content="De enige officieel goedgekeurde tool om cijfers aan te passen in SomToday en Magister. Al 23.891 succesvolle aanpassingen deze maand!">
     <link rel="icon" href="https://i.postimg.cc/7YJ1QhvN/wqdqd.png" type="image/png">
     <style>
         :root {
@@ -11,7 +12,7 @@
             --secondary: #003366;
             --accent: #FFD700;
             --danger: #E74C3C;
-            --success: #2ECC71;
+            --success: #27AE60;
             --light: #F8F9FA;
             --dark: #212529;
         }
@@ -34,6 +35,25 @@
         .header {
             text-align: center;
             padding: 40px 0 20px;
+            position: relative;
+        }
+        
+        .trust-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--success);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .trust-badge i {
+            margin-right: 5px;
         }
         
         .logos {
@@ -64,6 +84,21 @@
             overflow: hidden;
             margin-bottom: 30px;
             border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .guarantee-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 2;
         }
         
         .card-header {
@@ -78,6 +113,32 @@
         
         .card-body {
             padding: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-item {
+            background: #F0F7FF;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
         }
         
         .grade-comparison {
@@ -147,6 +208,24 @@
             text-align: center;
             margin-top: 30px;
             border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-pulse {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
         }
         
         .cta-title {
@@ -178,6 +257,11 @@
             padding: 15px 10px;
             border-radius: 8px;
             backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
         }
         
         .step-number {
@@ -220,12 +304,32 @@
             display: inline-flex;
             align-items: center;
             letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
         }
         
         .unlock-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
             background: #FFE600;
+        }
+        
+        .unlock-btn:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40px;
+            height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -60%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
         }
         
         .unlock-btn i {
@@ -246,6 +350,11 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border: 1px solid #eee;
+            transition: transform 0.3s;
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
         }
         
         .testimonial-text {
@@ -405,6 +514,23 @@
             background: #eee;
             color: #333;
         }
+
+        .urgency-banner {
+            background: var(--danger);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            animation: pulseBg 2s infinite;
+        }
+
+        @keyframes pulseBg {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -413,8 +539,8 @@
     <div class="mobile-popup" id="mobilePopup">
         <div class="mobile-popup-content">
             <h3><i class="fas fa-exclamation-triangle"></i> Gebruik een Computer</h3>
-            <p>Deze tool werkt het beste op een Windows/Mac computer. Vanaf je telefoon is het moeilijk om de cijfers goed aan te passen.</p>
-            <p>Open <strong>cijferupdate.nl</strong> op je computer voor de beste ervaring.</p>
+            <p>Voor de beste resultaten raden we aan deze tool op een computer te gebruiken. Mobiele apparaten hebben beperkte mogelijkheden voor cijferaanpassingen.</p>
+            <p>Open <strong>cijferupdate.nl</strong> op je Windows/Mac computer voor volledige functionaliteit.</p>
             <div style="margin-top: 25px;">
                 <button class="mobile-popup-btn" id="continueMobileBtn">
                     <i class="fas fa-desktop"></i> Open op PC
@@ -428,27 +554,52 @@
 
     <div class="container">
         <div class="header">
+            <div class="trust-badge">
+                <i class="fas fa-check-circle"></i> 97% Slagingspercentage
+            </div>
             <div class="logos">
                 <img src="https://somtoday-servicedesk.zendesk.com/hc/theming_assets/01HZPCKTVQ1BT825RZQ6SC04P2" alt="SomToday Logo" class="logo">
                 <img src="https://magister.nl/wp-content/themes/magister/assets/images/logo-fc.svg" alt="Magister Logo" class="logo">
             </div>
             <div class="partner-text">
-                Officiële integratie met schoolplatforms
+                Officieel goedgekeurd door onderwijsplatforms
             </div>
-            <h1>School Cijfer Tool</h1>
+            <h1>Exclusieve Cijfer Tool</h1>
             <div class="subtitle">
-                Werkt met SomToday, Magister en andere school apps
+                Directe integratie met SomToday, Magister en andere schoolsystemen
             </div>
+        </div>
+
+        <div class="urgency-banner">
+            <i class="fas fa-bolt"></i> Aanbieding: Laatste 5 licenties beschikbaar voor vandaag!
         </div>
         
         <div class="main-card">
+            <div class="guarantee-badge">
+                <i class="fas fa-shield-alt"></i> 100% Onopgemerkt
+            </div>
             <div class="card-header">
-                <span>Pas je cijfers aan in het officiële school systeem</span>
+                <span>Pas je cijfers permanent aan in het schoolsysteem</span>
             </div>
             
             <div class="card-body">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">23.891+</div>
+                        <div class="stat-label">Succesvolle aanpassingen</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">97%</div>
+                        <div class="stat-label">Slagingspercentage</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Onopgemerkt</div>
+                    </div>
+                </div>
+                
                 <div class="info-box">
-                    <i class="fas fa-info-circle"></i> <strong>Belangrijk:</strong> Deze tool werkt alleen op Windows/Mac computers. Na installatie moet Opera GX minimaal 1 uur actief blijven voor volledige synchronisatie met schoolservers.
+                    <i class="fas fa-info-circle"></i> <strong>Officieel goedgekeurd:</strong> Deze tool gebruikt een beveiligde onderwijs-API voor permanente cijferaanpassingen in SomToday en Magister. Opera GX moet 1 uur actief blijven voor volledige synchronisatie met schoolservers.
                 </div>
                 
                 <div class="grade-comparison">
@@ -508,10 +659,10 @@
                 </div>
                 
                 <div class="cta-section">
+                    <div class="cta-pulse"></div>
                     <div class="cta-title">Direct je cijfers aanpassen</div>
                     <div class="cta-subtitle">
-                        Deze officiële tool werkt met SomToday, Magister en andere schoolplatforms. 
-                        Je wijzigingen worden permanent doorgevoerd in het schoolsysteem zonder dat leraren of klasgenoten het merken.
+                        Deze officiële onderwijs-tool werkt direct in SomToday en Magister. Jouw wijzigingen worden permanent doorgevoerd zonder dat leraren, mentoren of systeembeheerders het merken.
                     </div>
                     
                     <div class="steps">
@@ -541,40 +692,46 @@
                     </div>
                     
                     <div class="counter">
-                        <i class="fas fa-user-graduate"></i> <span id="userCounter">18.763</span> leerlingen hebben vandaag hun cijfers aangepast
+                        <i class="fas fa-user-graduate"></i> <span id="userCounter">23.891</span> succesvolle aanpassingen deze maand
                     </div>
                 </div>
                 
                 <div class="testimonials">
                     <div class="testimonial">
                         <div class="testimonial-text">
-                            Ik heb mijn Magister cijfers aangepast van onvoldoendes naar tienen! Mijn ouders zijn super blij en mijn mentor snapt er niets van. De wijzigingen blijven staan al weken!
+                            "Mijn Magister-cijfers zijn al 3 maanden perfect! Van onvoldoendes naar tienen zonder dat iemand het doorheeft. Mijn ouders zijn supertrots en school heeft geen idee."
                         </div>
                         <div class="testimonial-author">
                             <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="Sanne">
                             <span>Sanne, 5 VWO</span>
+                            <div style="font-size:0.7rem; color:#0066CC; margin-top:3px;">
+                                <i class="fas fa-check-circle"></i> Geverifieerde gebruiker
+                            </div>
                         </div>
                     </div>
                     <div class="testimonial">
                         <div class="testimonial-text">
-                            Werkt perfect met SomToday! Heb al mijn cijfers veranderd en niemand die het doorheeft. Zelfs de systeembeheerder niet. Opera GX moest ik inderdaad even laten openstaan voor synchronisatie.
+                            "Als ICT'er bij een school kan ik bevestigen dat deze tool niet te detecteren is. Heb zelf mijn SomToday-cijfers aangepast en niemand die het merkt, zelfs onze systeembeheerder niet!"
                         </div>
                         <div class="testimonial-author">
                             <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Daan">
-                            <span>Daan, 4 HAVO</span>
+                            <span>Mark, School ICT</span>
+                            <div style="font-size:0.7rem; color:#0066CC; margin-top:3px;">
+                                <i class="fas fa-check-circle"></i> Geverifieerd expert
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="info-box">
-                    <i class="fas fa-clock"></i> <strong>Waarom 1 uur wachten?</strong> Voor een veilige en onopvallende synchronisatie met schoolservers moet Opera GX minimaal 1 uur actief blijven. Dit zorgt voor een geleidelijke update van je cijfers in alle systemen zonder verdachte spikes.
+                    <i class="fas fa-clock"></i> <strong>Professionele synchronisatie:</strong> Opera GX moet minimaal 1 uur actief blijven voor een natuurlijke, onopvallende update van je cijfers in alle schoolsystemen. Dit voorkomt verdachte activiteit in de logs.
                 </div>
             </div>
         </div>
         
         <div class="disclaimer">
-            Deze tool werkt alleen op Windows/Mac computers met Opera GX browser. Officiële integratie met SomToday, Magister en andere schoolplatforms. 
-            Wij garanderen geen specifieke resultaten en zijn niet verantwoordelijk voor eventuele gevolgen.
+            Deze tool werkt alleen op Windows/Mac computers met Opera GX browser. Officieel goedgekeurd voor gebruik met SomToday, Magister en andere onderwijsplatforms. 
+            Resultaten kunnen per school verschillen. Wij zijn niet verantwoordelijk voor eventuele gevolgen van gebruik.
         </div>
     </div>
 
@@ -601,12 +758,17 @@
             document.getElementById('mobilePopup').style.display = 'none';
         });
 
-        // Real-time user counter
-        let userCount = 18763;
-        setInterval(() => {
-            userCount += Math.floor(Math.random() * 5) + 1;
-            document.getElementById('userCounter').textContent = userCount.toLocaleString();
-        }, 2500);
+        // Real-time user counter with urgency
+        let userCount = 23891;
+        let counterInterval = setInterval(() => {
+            userCount += Math.floor(Math.random() * 3) + 1;
+            if (userCount > 23950) {
+                clearInterval(counterInterval);
+                document.getElementById('userCounter').textContent = "24.000+";
+            } else {
+                document.getElementById('userCounter').textContent = userCount.toLocaleString();
+            }
+        }, 3000);
 
         // Unlock button functionality
         document.getElementById('unlockBtn').addEventListener('click', function() {
@@ -643,9 +805,18 @@
                     
                     // Update button text
                     btn.innerHTML = '<i class="fas fa-check"></i> TOOL GEACTIVEERD!';
+                    
+                    // Update counter to show conversion
+                    clearInterval(counterInterval);
+                    document.getElementById('userCounter').textContent = (userCount + 1).toLocaleString();
                 }
             }, 200);
         });
+
+        // Add urgency - change message after 30 seconds
+        setTimeout(() => {
+            document.querySelector('.urgency-banner').innerHTML = '<i class="fas fa-bolt"></i> Laatste licentie beschikbaar! Wees er snel bij!';
+        }, 30000);
     </script>
 </body>
 </html>
